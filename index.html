@@ -94,10 +94,15 @@
     <div id="terminal" class="content cursor"></div>
   </div>
 
+  <!-- Sonido -->
+  <audio id="typingSound" src="typing.mp3" preload="auto"></audio>
+
   <script>
     const terminal = document.getElementById("terminal");
+    const typingSound = document.getElementById("typingSound");
+    typingSound.volume = 0.35;
 
-    let started = false;
+    let audioEnabled = false;
     let acceptingInput = false;
     let line = 0;
     let char = 0;
@@ -146,13 +151,27 @@
       "[S] Sí, contigo    [N] No"
     ];
 
+    function playTyping() {
+      if (audioEnabled) {
+        typingSound.currentTime = 0;
+        typingSound.play();
+      }
+    }
+
+    function stopTyping() {
+      typingSound.pause();
+      typingSound.currentTime = 0;
+    }
+
     function type() {
       if (line < lines.length) {
         if (char < lines[line].length) {
+          playTyping();
           terminal.textContent += lines[line][char];
           char++;
           setTimeout(type, 35);
         } else {
+          stopTyping();
           terminal.textContent += "\n";
           line++;
           char = 0;
@@ -163,15 +182,13 @@
       }
     }
 
-    // Empieza con cualquier tecla
     document.addEventListener("keydown", () => {
-      if (!started) {
-        started = true;
+      if (!audioEnabled) {
+        audioEnabled = true;
         type();
       }
     }, { once: true });
 
-    // Input S / N
     document.addEventListener("keydown", (e) => {
       if (!acceptingInput) return;
 
