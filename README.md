@@ -1,4 +1,4 @@
-## 💖 Emotional Pentesting Simulation
+## 💖 Emotional pentesting simulation
 
 This project is a small mix of **HTML, CSS and JavaScript**.
 
