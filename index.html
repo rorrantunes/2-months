@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Uptime: 2 Meses</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="pixel.png">
+
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #00ff88;
+      font-family: "Courier New", monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .terminal {
+      width: 90%;
+      max-width: 900px;
+      background: #040404;
+      border: 1px solid #00ff88;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.25);
+    }
+
+    .header {
+      color: #7f8c8d;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .content {
+      white-space: pre-wrap;
+      line-height: 1.7;
+      min-height: 420px;
+    }
+
+    .cursor::after {
+      content: "▌";
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+
+    .success {
+      color: #00ffaa;
+    }
+
+    .warning {
+      color: #ff3333;
+      text-shadow: 0 0 8px rgba(255, 51, 51, 0.7);
+    }
+
+    .heart {
+      margin-top: 18px;
+      color: #00ffaa;
+      white-space: pre;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.2;
+      opacity: 0;
+      animation: heartFadeIn 1.2s ease forwards, heartPulse 1.8s ease-in-out infinite;
+      animation-delay: 1s, 2.5s;
+    }
+
+    @keyframes heartFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="terminal">
+    <div class="header">
+      terminal-segura v5.0 — conexión emocional cifrada  
+      uptime: desde 22/11/2025
+    </div>
+    <div id="terminal" class="content cursor"></div>
+  </div>
+
+  <!-- Sonido -->
+  <audio id="typingSound" src="typing.mp3" preload="auto"></audio>
+
+  <script>
+    const terminal = document.getElementById("terminal");
+    const typingSound = document.getElementById("typingSound");
+    typingSound.volume = 0.35;
+
+    let audioEnabled = false;
+    let acceptingInput = false;
+    let line = 0;
+    let char = 0;
+
+    const lines = [
+      "$ ssh vale@corazon.local",
+      "Autenticando identidad...",
+      "Clave válida ✔",
+      "Acceso concedido",
+      "",
+      "$ identificar_objetivo --nombre=Javier",
+      "Objetivo encontrado",
+      "Estado: prioridad absoluta",
+      "",
+      "$ iniciar analisis --tipo=emocional --profundidad=maxima",
+      "Procesando sentimientos...",
+      "",
+      "Resultado:",
+      "Javier no es una coincidencia.",
+      "No es un momento.",
+      "No es algo pasajero.",
+      "",
+      "Es la persona que Vale ama profundamente.",
+      "",
+      "$ evaluar_intencion",
+      "✔ Quiero una vida contigo",
+      "✔ Quiero acompañar cada meta que te propongas",
+      "✔ Quiero verte crecer, caer y volver a intentar",
+      "",
+      "$ verificar_compromiso",
+      "Promesa detectada:",
+      "Nunca fallarnos.",
+      "Nunca soltarnos por miedo.",
+      "Elegirnos incluso en los días difíciles.",
+      "",
+      "$ establecer_conexion --largo-plazo",
+      "Conexión creada con éxito",
+      "Parámetros: amor, respeto, paciencia, lealtad",
+      "",
+      "Declaración final:",
+      "Vale ama a Javier con intención.",
+      "Con futuro.",
+      "Con verdad.",
+      "",
+      "¿Deseas continuar esta conexión?",
+      "[S] Sí, contigo    [N] No"
+    ];
+
+    function playTyping() {
+      if (audioEnabled) {
+        typingSound.currentTime = 0;
+        typingSound.play();
+      }
+    }
+
+    function stopTyping() {
+      typingSound.pause();
+      typingSound.currentTime = 0;
+    }
+
+    function type() {
+      if (line < lines.length) {
+        if (char < lines[line].length) {
+          playTyping();
+          terminal.textContent += lines[line][char];
+          char++;
+          setTimeout(type, 35);
+        } else {
+          stopTyping();
+          terminal.textContent += "\n";
+          line++;
+          char = 0;
+          setTimeout(type, 420);
+        }
+      } else {
+        acceptingInput = true;
+      }
+    }
+
+    document.addEventListener("keydown", () => {
+      if (!audioEnabled) {
+        audioEnabled = true;
+        type();
+      }
+    }, { once: true });
+
+    document.addEventListener("keydown", (e) => {
+      if (!acceptingInput) return;
+
+      const key = e.key.toLowerCase();
+      acceptingInput = false;
+      terminal.textContent += "\n";
+
+      if (key === "s") {
+        terminal.innerHTML += `
+<span class="success">✔ CONEXIÓN ACEPTADA</span>
+
+Inicio de etapa mes 2 completado
+Cifrado aplicado
+Confianza establecida
+
+Resultado:
+Vale elige a Javier.
+Sin dudas.
+Sin condiciones.
+
+Estado final: CONEXIÓN PERMANENTE 🔐
+
+<div class="heart">
+  010101010 010101010
+ 01010101010101010101010
+0101010101010101010101010
+01010101010101010101010
+ 010101010101010101010
+  0101010101010101010
+   010101010101010
+    01010101010
+     010101
+      0101
+
+Felices 2 meses mi amor, te amo demasiado
+</div>
+`;
+      }
+
+      if (key === "n") {
+        terminal.innerHTML += `
+<span class="warning">⛔ ZONA DE PELIGRO ACTIVADA</span>
+
+ALERTA CRÍTICA DEL SISTEMA:
+
+Esta conexión no es un experimento.
+No es algo que se repita igual.
+No es reemplazable.
+
+Si eliges salir:
+- Pierdes a alguien que te ama de verdad
+- Pierdes a alguien que cree en ti y en tus metas
+- Pierdes a alguien que quería una vida contigo
+
+Vale no promete perfección.
+Promete lealtad.
+Presencia.
+Y nunca fallarte.
+
+ÚLTIMA CONFIRMACIÓN.
+
+¿Deseas continuar esta conexión?
+[S] Sí, elijo quedarme    [N] No (riesgo crítico)
+`;
+        acceptingInput = true;
+      }
+    });
+  </script>
+</body>
+</html>
